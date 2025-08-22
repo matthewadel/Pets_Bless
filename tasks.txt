@@ -1,0 +1,16 @@
+1- home page with search with name and filter with status and infinite scrolling, you can use useInfiniteQuery to handle inifinte scrolling
+please create a pet module, and import this /pet page in the page file inside app folder and this page should list all the pets inside the app depending on the state so you have to create a small toggle button between the three statuses of the pets available, pending and sold and use the following request: https://petstore.swagger.io/v2/pet/findByStatus?status=available note that the results of this api is too large, so please devide the results into pages and each page should include only 20 pets and use infinite scrolling to navigate through the different pets insie the home page, make sure to use grid in the page and each grid contains of 4 cards and preview pets data inside each card and please use a default image for each pet if there is no image provided and make the ability for the user to search in the pets using name and inside each card preview the tag of each pet and if the user pressed on any tag, please also search in the pets using this tag
+
+2- pet details
+please create pet details page that previews the details of the pet, use the request https://petstore.swagger.io/v2/pet/${petID} to get pet details inside each pag
+
+3- when i go to pet details and get back i want to be in the same location as i left the pets page
+
+4- error boundary
+please create a global error handling component and use error boundary to catch any error in the app
+
+5- update pet name, status and image
+please add the ability for the user to update pet details, so inside pet details, please add a new button just to update the pet which will navigate to pet/id/update page and inside this page create a simple form with simple actions to update the pet's name, status and image only 
+update pets name and status using the following request https://petstore.swagger.io/v2/pet/{id}, it is a post request and in the body just send name and status note that the type of content-type is form data
+and to update the pet's image use the following request
+https://petstore.swagger.io/v2/pet/{id}/uploadImage and send file in the body note that the type of content-type is form data
