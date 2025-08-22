@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { usePets } from "./_hooks";
 import { PetStatus, Pet } from "@/types";
 import { PetCard, StatusToggle, SearchInput, LoadingGrid } from "./_components";
+import { useAuth } from "@/providers/auth-provider";
 
 export default function PetsPage() {
   const [status, setStatus] = useState<PetStatus>("available");
@@ -11,6 +12,8 @@ export default function PetsPage() {
   const [selectedTag, setSelectedTag] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [visiblePages, setVisiblePages] = useState(1); // How many pages to show
+
+  const { user, logout } = useAuth();
 
   // Debounce search input
   useEffect(() => {
@@ -100,11 +103,29 @@ export default function PetsPage() {
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Pet Store</h1>
-          <p className="text-gray-600">
-            Discover amazing pets looking for their forever homes
-          </p>
+        <div className="mb-8 flex justify-between items-start">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Pet Store</h1>
+            <p className="text-gray-600">
+              Discover amazing pets looking for their forever homes
+            </p>
+          </div>
+          <div className="flex items-center space-x-4">
+            {user && (
+              <div className="text-right">
+                <p className="text-sm text-gray-600">Welcome back,</p>
+                <p className="font-semibold text-gray-900">
+                  {user.firstName} {user.lastName}
+                </p>
+              </div>
+            )}
+            <button
+              onClick={logout}
+              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition-colors duration-200 font-medium"
+            >
+              Logout
+            </button>
+          </div>
         </div>
 
         {/* Filters */}

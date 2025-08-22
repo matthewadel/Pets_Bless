@@ -9,5 +9,4 @@ update pets name and status using the following request https://petstore.swagger
 and to update the pet's image use the following request
 https://petstore.swagger.io/v2/pet/{id}/uploadImage and send file in the body note that the type of content-type is form data
 
-- add logout button in homepage
 - remove any <svg or <path tags

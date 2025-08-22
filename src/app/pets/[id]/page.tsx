@@ -85,7 +85,7 @@ export default function PetDetailsPage({ params }: PetDetailsPageProps) {
           <Breadcrumb
             items={[
               { label: "Home", href: "/" },
-              { label: "Pets", href: "/pets" },
+              { label: "Pets", href: "/" },
               { label: displayPet.name || "Pet Details" },
             ]}
           />
