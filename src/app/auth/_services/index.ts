@@ -1,15 +1,5 @@
 import { RegisterFormData } from "@/app/auth/_schemas/register";
-
-export interface User {
-  id: number;
-  username: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  phone: string;
-  userStatus: number;
-}
+import { User } from "@/types";
 
 export async function loginUser(
   username: string,
