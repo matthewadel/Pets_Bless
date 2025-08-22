@@ -1,12 +1,2 @@
-- when i go to pet details and get back i want to be in the same location as i left the pets page
-
-- error boundary
-please create a global error handling component and use error boundary to catch any error in the app
-
-- update pet name, status and image
-please add the ability for the user to update pet details, so inside pet details, please add a new button just to update the pet which will navigate to pet/id/update page and inside this page create a simple form with simple actions to update the pet's name, status and image only 
-update pets name and status using the following request https://petstore.swagger.io/v2/pet/{id}, it is a post request and in the body just send name and status note that the type of content-type is form data
-and to update the pet's image use the following request
-https://petstore.swagger.io/v2/pet/{id}/uploadImage and send file in the body note that the type of content-type is form data
-
-- remove any <svg or <path tags
+1- when i go to pet details and get back i want to be in the same location as i left the pets page
+2- error boundary: please create a global error handling component and use error boundary to catch any error in the app

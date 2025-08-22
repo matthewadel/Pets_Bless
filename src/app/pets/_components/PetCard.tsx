@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Pet } from "@/types";
 import { PawPrint } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { isValidImageUrl } from "@/app/utils";
 
 interface PetCardProps {
   pet: Pet;
@@ -14,17 +15,6 @@ interface PetCardProps {
 export function PetCard({ pet, onTagClick }: PetCardProps) {
   const petImage = pet.photoUrls?.[0];
   const router = useRouter();
-
-  // Validate if the image URL is valid
-  const isValidImageUrl = (url: string) => {
-    if (!url || url === "string") return false;
-    try {
-      const parsedUrl = new URL(url);
-      return parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:";
-    } catch {
-      return false;
-    }
-  };
 
   const getStatusColor = (status: string) => {
     switch (status) {

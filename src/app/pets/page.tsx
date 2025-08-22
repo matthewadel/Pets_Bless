@@ -5,6 +5,7 @@ import { usePets } from "./_hooks";
 import { PetStatus, Pet } from "@/types";
 import { PetCard, StatusToggle, SearchInput, LoadingGrid } from "./_components";
 import { useAuth } from "@/providers/auth-provider";
+import { Frown } from "lucide-react";
 
 export default function PetsPage() {
   const [status, setStatus] = useState<PetStatus>("available");
@@ -202,19 +203,7 @@ export default function PetsPage() {
         {!isLoading && allPets.length === 0 && (
           <div className="text-center py-12">
             <div className="max-w-md mx-auto">
-              <svg
-                className="mx-auto h-12 w-12 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 48 48"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M34 36l-8-8-8 8M34 12l-8 8-8-8"
-                />
-              </svg>
+              <Frown className="mx-auto h-12 w-12 text-gray-400" />
               <h3 className="mt-2 text-sm font-medium text-gray-900">
                 No pets found
               </h3>
