@@ -10,16 +10,24 @@ import {
   PetNotFound,
 } from "../_components";
 import { PawPrint } from "lucide-react";
-import { isValidImageUrl } from "@/app/utils";
+import { isValidImageUrl } from "@/utils";
 
 interface PetDetailsPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default function PetDetailsPage({ params }: PetDetailsPageProps) {
-  const { data: pet, isLoading } = usePetDetails(params.id);
+  const [resolvedParams, setResolvedParams] = React.useState<{
+    id: string;
+  } | null>(null);
+
+  React.useEffect(() => {
+    params.then(setResolvedParams);
+  }, [params]);
+
+  const { data: pet, isLoading } = usePetDetails(resolvedParams?.id || "");
 
   const statusColors = {
     available: "bg-green-100 text-green-800",
@@ -27,7 +35,7 @@ export default function PetDetailsPage({ params }: PetDetailsPageProps) {
     sold: "bg-red-100 text-red-800",
   };
 
-  if (isLoading && !pet) {
+  if (!resolvedParams || (isLoading && !pet)) {
     return <PetDetailsSkeleton />;
   }
 

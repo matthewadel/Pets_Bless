@@ -1,2 +1,0 @@
-1- when i go to pet details and get back i want to be in the same location as i left the pets page
-2- error boundary: please create a global error handling component and use error boundary to catch any error in the app

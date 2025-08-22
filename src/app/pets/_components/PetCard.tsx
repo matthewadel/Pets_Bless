@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Pet } from "@/types";
 import { PawPrint } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { isValidImageUrl } from "@/app/utils";
+import { isValidImageUrl } from "@/utils";
 
 interface PetCardProps {
   pet: Pet;

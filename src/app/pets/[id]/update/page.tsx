@@ -8,17 +8,25 @@ import Image from "next/image";
 import { LinksContainer, PetNotFound } from "../../_components";
 import { PawPrint, Upload } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { isValidImageUrl } from "@/app/utils";
+import { isValidImageUrl } from "@/utils";
 import { LoadingPage } from "@/components";
 
 interface UpdatePetPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default function UpdatePetPage({ params }: UpdatePetPageProps) {
-  const { data: pet, isLoading } = usePetDetails(params.id);
+  const [resolvedParams, setResolvedParams] = React.useState<{
+    id: string;
+  } | null>(null);
+
+  React.useEffect(() => {
+    params.then(setResolvedParams);
+  }, [params]);
+
+  const { data: pet, isLoading } = usePetDetails(resolvedParams?.id || "");
   const {
     updatePet,
     updatePetImage,
@@ -105,7 +113,7 @@ export default function UpdatePetPage({ params }: UpdatePetPageProps) {
     }
   };
 
-  if (isLoading) {
+  if (!resolvedParams || isLoading) {
     return <LoadingPage />;
   }
 
