@@ -1,7 +1,10 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { Pet } from "@/types";
 import { PawPrint } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface PetCardProps {
   pet: Pet;
@@ -10,10 +13,11 @@ interface PetCardProps {
 
 export function PetCard({ pet, onTagClick }: PetCardProps) {
   const petImage = pet.photoUrls?.[0];
+  const router = useRouter();
 
   // Validate if the image URL is valid
   const isValidImageUrl = (url: string) => {
-    if (!url) return false;
+    if (!url || url === "string") return false;
     try {
       const parsedUrl = new URL(url);
       return parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:";
@@ -21,8 +25,6 @@ export function PetCard({ pet, onTagClick }: PetCardProps) {
       return false;
     }
   };
-
-  const validImageUrl = petImage && isValidImageUrl(petImage) ? petImage : null;
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -37,12 +39,21 @@ export function PetCard({ pet, onTagClick }: PetCardProps) {
     }
   };
 
+  const handleNavigate = () => {
+    // Store pet data in localStorage for the details page
+    localStorage.setItem("selectedPet", JSON.stringify(pet));
+    router.push(`/pets/${pet.id}`);
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div
+      onClick={handleNavigate}
+      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+    >
       <div className="relative h-48 w-full bg-gray-200">
-        {validImageUrl ? (
+        {isValidImageUrl(petImage) ? (
           <Image
-            src={validImageUrl}
+            src={petImage}
             alt={pet.name || "Pet"}
             fill
             className="object-cover"
@@ -79,7 +90,11 @@ export function PetCard({ pet, onTagClick }: PetCardProps) {
             {pet.tags.slice(0, 3).map((tag) => (
               <button
                 key={tag.id}
-                onClick={() => onTagClick(tag.name)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation(); // Prevent event bubbling to parent div
+                  onTagClick(tag.name);
+                }}
                 className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full hover:bg-blue-200 transition-colors duration-200 cursor-pointer"
               >
                 {tag.name}

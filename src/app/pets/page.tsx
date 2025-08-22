@@ -51,7 +51,7 @@ export default function PetsPage() {
     const handleScroll = () => {
       if (
         window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight - 200
+        document.documentElement.offsetHeight - 1000
       ) {
         const totalPages = data?.pages.length || 0;
         if (visiblePages < totalPages) {

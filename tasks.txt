@@ -1,6 +1,3 @@
-- pet details
-please create pet details page that previews the details of the pet, use the request https://petstore.swagger.io/v2/pet/${petID} to get pet details inside each pag
-
 - when i go to pet details and get back i want to be in the same location as i left the pets page
 
 - error boundary
@@ -11,3 +8,6 @@ please add the ability for the user to update pet details, so inside pet details
 update pets name and status using the following request https://petstore.swagger.io/v2/pet/{id}, it is a post request and in the body just send name and status note that the type of content-type is form data
 and to update the pet's image use the following request
 https://petstore.swagger.io/v2/pet/{id}/uploadImage and send file in the body note that the type of content-type is form data
+
+- add logout button in homepage
+- remove any <svg or <path tags
